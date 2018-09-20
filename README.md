@@ -1,0 +1,22 @@
+# Digital Marketing Question Filter
+This project is my attempt to create and train a classification model to filter marketing emails/questions into one of three general digital marketing categories, Pay Per Click Marketing, Search Engine Optimization, and Email Marketing.
+## Purpose
+The goal of this project is to reduce the time needed manually filtering through emails, and automatically send the query to the correct person. The goal behind this is to save time manually asking coworkers for specific questions, or forward the questions to the respective expert. the process used to create the machine learning algorithm can be reused with more relevant data to further increase accuracy. This could help save time for managers, who would no longer have to sort through emails manually.
+### Data
+The data being used here is from 4 separate subreddits, https://www.reddit.com/r/PPC, https://www.reddit.com/r/SEO, https://www.reddit.com/r/email, and https://www.reddit.com/r/Emailmarketing. Because r/emailmarketing did not have many unique posts at the time of scraping, September 4th 2018, I decided to combine the two subreddits to have more data. The data for each subreddit is relatively small, with the largest file being less than 2 megabytes. After preprocessing, my data contains 2 features, raw text data, and the target variable, subreddit.
+### Technologies used
+For this project I used Python and several libraries. These libraries include Pandas, Numpy, Seaborn, Matplotlib, and Sklearn. The IDE used was Jupyter Notebooks. All of the libraries used in this project can be downloaded using Anaconda, https://www.anaconda.com/download/.
+### Process
+For this Project I gathered data from several subreddits about various types of digital marketing strategies, and used term frequency–inverse document frequency, or TFDIF, to change my text data into a format that could then be fed into a machine learning model to classify which posts came from which reddit, which in turn could predict the topic of questions being asked.
+### Models Used
+For this model I compared Random Forests, Multinomial Naive Bayes, and Logistic Regression.
+- Logistic Regression: Logistic Regression is similar to linear regression, in that it creates an equation to predict the probability of each post in being in each class. its does this by using the Logit link function. This model is easily interpretable, but may have low accuracy depending on the training data.
+- Multinomial Naive Bayes: This model uses Bayes Theorem to predict classes. This model tends to have very high accuracy, but its predicted probabilities tend to be inaccurate. The models main assumpition, that individual features (in this case, each word) no not relate to each other, is most likely not met in this project.
+- Random Forest: Random Forest uses a classification method known as Decision Trees, creates multiple Decision Trees, and uses each tree to ultimately decide which class each subreddit came from. This method is known for being a fast model to fit, but can suffer from high varriance.
+
+
+After looking at the results for all 3, I decided that Logistic Regression should be the model used for both my presentation and use in production, due to it's high accuracy, and the fact that the predicted probabilities are more distinct than Naive Bayes. Random Forest unfortunately suffered from overfitting to the training data, and therefore would not be great at generalizing to real world data
+### Results
+Overall each model did very well, with Logistic Regression and Multinomial Naive Bayes each scoring 94% accuracy, and Random Forests scoring 93% accuracy. Looking at each models confusion matrix, email subreddits tended to be very distinct, and most of the errors came when my models were differentiating between the PPC and SEO subreddits. I do believe that in its current state, my model would be able to be used in production, with it becoming more and more accurate over time as more data is gathered.
+### Next Steps
+Moving forward, I would love to use data from actual digital marketing agencies to train my model as opposed to reddit data. I believe that this would make my model more accurate for its intended purpose. I would also love to test my model on questions asked directly to digital marketing agencies, and see if my model continues to be highly accurate. The process used here could be used on other project that require NLP and classification processes, like if a review is positive or negative based on content alone.
